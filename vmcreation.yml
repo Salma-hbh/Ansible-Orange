@@ -1,0 +1,40 @@
+---
+- name: create vm demo
+  hosts: all
+  become: true
+  tasks:
+    - name: create VM
+      community.vmware.vmware_guest:
+        hostname: 192.168.11.146
+        username: root
+        password: rootroot
+        validate_certs: false
+        guest_id: ubuntu64guest
+        datacenter: ha-datacenter
+        name: "{{vm_name}}"
+        folder: /ha-datacenter/vm
+        state: poweredon
+        disk:
+          - size_gb: "{{size_gb}}"
+            type: thin
+            datastore: "{{datastore_name}}"
+        hardware:
+          memory_mb: "{{memory}}"
+          num_cpus: "{{cpu}}"
+          scsi: paravirtual
+        networks:
+          - name: VM Network
+            device_name: vmxnet3
+            ip: "{{ip_address}}"
+            netmask: 255.255.255.0
+        cdrom:
+          - controller_number: 0
+            unit_number: 0
+            state: present
+            type: iso
+            iso_path: "[datastore1] iso/ubuntu-20.04.3-desktop-amd64.iso"
+        wait_for_ip_address: true
+      delegate_to: localhost
+      register: deploy_vm
+
+
