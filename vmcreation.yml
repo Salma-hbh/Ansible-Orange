@@ -2,9 +2,12 @@
 - name: create vm demo
   hosts: all
   become: true
+  vars:
+      ubuntu_desktop: "[datastore1] iso/ubuntu-20.04.3-desktop-amd64.iso"
+      ubuntu_server: "[datastore1] iso/ubuntu-20.04.4-live-server-amd64.iso"
   tasks:
     - name: create VM
-      community.vmware.vmware_guest:
+      vmware_guest:
         hostname: 192.168.11.146
         username: root
         password: rootroot
@@ -32,7 +35,7 @@
             unit_number: 0
             state: present
             type: iso
-            iso_path: "[datastore1] iso/ubuntu-20.04.3-desktop-amd64.iso"
+            iso_path: "{{ubuntu_desktop}}"
         wait_for_ip_address: true
       delegate_to: localhost
       register: deploy_vm
