@@ -11,10 +11,7 @@
         cache_valid_time=3600
     - name: Packages installation
       apt:
-        name:
-          - sysstat
-          - mariadb-server
-          - net-tools
+        name: "{{package}}"
         state: latest
     - name: Upgrade all apt packages
       apt:
