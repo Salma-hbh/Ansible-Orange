@@ -35,7 +35,7 @@
             unit_number: 0
             state: present
             type: iso
-            iso_path: "iso/ubuntu-20.04.3-desktop-amd64.iso"
+            iso_path: "{{ubuntu_desktop}}"
         wait_for_ip_address: true
       delegate_to: localhost
       register: deploy_vm
