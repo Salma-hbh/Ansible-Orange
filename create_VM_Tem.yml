@@ -25,7 +25,7 @@
       networks:
         - name: VM Network
           device_name: vmxnet3
-          ip: "{{ip_address}}
+          ip: "{{ip_address}}"
           netmask: 255.255.255.0
       wait_for_ip_address: yes
     delegate_to: localhost
