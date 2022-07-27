@@ -9,7 +9,7 @@
       username: Administrator@localhost.localdomain
       password: Root@root1
       validate_certs: False
-      name: testvm_2
+      name: "{{vm_name}}"
       template: VM_Template
       datacenter: My-datacenter
       folder: /DC1/vm
