@@ -1,7 +1,7 @@
 ---
 - name: Create a VM from a template
   hosts: all
-  gather_facts: no
+  become: true
   tasks:
   - name: Clone the template
     vmware_guest:
