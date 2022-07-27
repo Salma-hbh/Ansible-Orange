@@ -1,0 +1,34 @@
+---
+- name: Create a VM from a template
+  hosts: all
+  gather_facts: no
+  tasks:
+  - name: Clone the template
+    vmware_guest:
+      hostname: 192.168.11.137
+      username: Administrator@localhost.localdomain
+      password: Root@root1
+      validate_certs: False
+      name: testvm_2
+      template: VM_Template
+      datacenter: My-datacenter
+      folder: /DC1/vm
+      state: poweredon
+      disk:
+        - size_gb: "{{size_gb}}"
+          type: thin
+          datastore: "{{datastore_name}}"
+      hardware:
+        memory_mb: "{{memory}}"
+        num_cpus: "{{cpu}}"
+        scsi: paravirtual
+      networks:
+        - name: VM Network
+          device_name: vmxnet3
+          ip: "{{ip_address}}
+          netmask: 255.255.255.0
+      wait_for_ip_address: yes
+    delegate_to: localhost
+    register: deploy_vm
+  - debug:
+      msg: "{{deploy_vm}}"
