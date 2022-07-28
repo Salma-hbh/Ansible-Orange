@@ -13,7 +13,7 @@
       name: "{{vm_name}}"
       template: VM_Template
       datacenter: My-datacenter
-      folder: /DC1/vm
+      folder: My-datacenter/vm
       state: poweredon
       disk:
         - size_gb: "{{size_gb}}"
