@@ -24,8 +24,7 @@
         num_cpus: "{{cpu}}"
         scsi: paravirtual
       networks:
-        - name: VM Network
-          device_name: vmxnet3
+        - name: VMkernel
           ip: "{{ip_address}}"
           netmask: 255.255.255.0
       wait_for_ip_address: yes
